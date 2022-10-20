@@ -1,0 +1,85 @@
+from pymongo import MongoClient
+
+client = MongoClient("mongodb://localhost:27017")
+
+db = client["Desert_race"]
+
+#Utilisateurs
+
+def create_user(nom:str, prenom:str, date_de_naissance:str, age:int, sexe:str, telephone:str, adresse_mail:str) -> None:
+    """Créer un utilisateur
+    :param nom: Nom de famille de l'utilisateur
+    :param prenom: Prénom de l'utilisateur
+    :param date_de_naissance : Date de naissance de l'utilisateur
+    :param age: Age de l'utilisateur
+    :param sexe: Sexe de l'utilisateur
+    :param telephone: Numéro de téléphone de l'utilisateur
+    :param adresse_mail: Adresse e-mail de l'utilisateur
+    """
+
+    pass
+
+def create_admin(nom:str, prenom:str, date_de_naissance:str, age:int, sexe:str, telephone:str, adresse_mail:str) -> None:
+    """Créer un administrateur
+    :param nom: Nom de famille de l'administrateur
+    :param prenom: Prénom de l'administrateur
+    :param date_de_naissance : Date de naissance de l'administrateur
+    :param age: Age de l'administrateur
+    :param sexe: Sexe de l'administrateur
+    :param telephone: Numéro de téléphone de l'administrateur
+    :param adresse_mail: Adresse e-mail de l'administrateur
+    """
+
+    pass
+
+def delete_user(adresse_mail:str) -> None:
+    """Supprime un utilisateur
+    :param adresse_mail: Adresse mail de l'utilisateur a supprimer
+    """
+
+    pass
+
+def calculate_age(date_de_naissance:tuple) -> int:
+    """Retourne l'âge de l'utilisateur
+    :param date_de_naissance: Année, Mois, Jour
+    """
+
+    pass
+
+#Blog - Articles
+
+def create_article(nom:str, prenom:str, titre:str, texte:str) -> None:
+    """Créer un article de blog
+    :param nom: Nom de l'utilisateur créant l'article
+    :param prénom: Prénom de l'utilisateur créant l'article
+    :param titre: Titre de l'article
+    :param texte: Texte de l'article
+    """
+
+    pass
+
+def update_article(titre:str, texte:str) -> None:
+    """Met à jour un article
+    :param titre: Titre de l'article
+    :param texte: Texte de l'article
+    """
+
+    pass
+
+def delete_article(id:str) -> None:
+    """Supprime un article
+    :param id: ID de l'article a supprimer
+    """
+
+    pass
+
+#Blog - Commentaires
+
+def add_comment():
+    pass
+
+def update_comment():
+    pass
+
+def delete_comment():
+    pass
