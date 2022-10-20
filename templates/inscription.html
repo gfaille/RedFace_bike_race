@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Page Subscribe</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="url_for('static', filename='page_de_connexion.css')">
+    <link href="https://fonts.googleap_is.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block body%} 
+    <form>
+        <h3>Enregistrez vous</h3>
+
+        <label for="name">Nom</label>
+        <input type="text" placeholder="Votre Nom" id="name">
+
+        <label for="forename">Prenom</label>
+        <input type="text" placeholder="Votre Prenom" id="forename">
+
+        <label for="username">Pseudo</label>
+        <input type="text" placeholder="Votre Pseudo" id="username">
+
+        <label for="password1">Mot de passe</label>
+        <input type="password" placeholder="Votre mot de passe" id="password1">
+
+        <label for="password2">Confirmation</label>
+        <input type="password" placeholder="Confirmer votre mot de passe" id="password2">
+        <!-- Vérifier la concordance des 2 passwords -->
+
+        <button>Enregistrer</button>
+
+    </form>
+{% endblock %}
