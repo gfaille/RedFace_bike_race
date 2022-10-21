@@ -4,6 +4,14 @@ client = MongoClient("mongodb://localhost:27017")
 
 db = client["Desert_race"]
 
+#db.create_collection("Utilisateurs")
+#db.create_collection("Blog")
+#db.create_collection("Forum")
+
+users = db.Utilisateurs
+blog = db.Blog
+forum = db.Forum
+
 #Utilisateurs
 
 def create_user(nom:str, prenom:str, date_de_naissance:str, age:int, sexe:str, telephone:str, adresse_mail:str) -> None:
@@ -56,7 +64,12 @@ def create_article(nom:str, prenom:str, titre:str, texte:str) -> None:
     :param texte: Texte de l'article
     """
 
-    pass
+    ID = blog.count_documents({}) + 1
+    auteur = nom + "." + prenom
+    date_du_jour = date.today()
+    maj = None
+
+    blog.insert_one({"ID" : ID, "Auteur" : auteur, "Date" : str(date_du_jour), "Mise à jour" : maj, "Titre" : titre, "Texte" : texte, "Commentaires" : []})
 
 def update_article(titre:str, texte:str) -> None:
     """Met à jour un article
