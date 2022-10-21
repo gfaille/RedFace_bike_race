@@ -1,8 +1,8 @@
-from datetime import date
 import hashlib
-from sqlite3 import Date, Timestamp
-import string
+from datetime import date, datetime
 from pymongo import MongoClient
+
+import crud
 
 client = MongoClient("mongodb://localhost:27017")
 
@@ -38,20 +38,9 @@ dico_forum = {
     "Post" : "Post"
 }
 
-#users.insert_one(dico_admin)
-#blog.insert_one(dico_blog)
-#forum.insert_one(dico_forum)
-
 commentaire_utilisateur= {
     "Commentaire 4" : "Ce n'est qu'un au revoir Kévin"
 }
-
-def ajouter_commentaire_article(ID:int, commentaire:dict) -> None:
-
-    a_modifier = blog.find_one({"ID" : ID})
-    a_modifier["Commentaires"].append(commentaire)
-
-    blog.update_one({"ID" : ID}, {"$set" : {"Commentaires" : a_modifier["Commentaires"]}})
 
 def age(date_de_naissance:tuple) -> int:
     """Retourne l'âge de l'utilisateur
@@ -73,30 +62,50 @@ print(age(date_de_naissance))"""
 
 print(age(date(2000, 1, 1)))"""
 
-
-"""jour = "1"
-titre = "1er article"
-id = hashlib.sha256((jour.encode()) + (titre.encode())).hexdigest()
-print(id)
-print(type(id))"""
-
-def create_article(nom:str, prenom:str, titre:str, texte:str) -> None:
-    """Créer un article de blog
-    :param nom: Nom de l'utilisateur créant l'article
-    :param prénom: Prénom de l'utilisateur créant l'article
-    :param titre: Titre de l'article
-    :param texte: Texte de l'article
-    """
-
-    ID = blog.count_documents({}) + 1
-    auteur = nom + "." + prenom
-    date_du_jour = date.today()
-    maj = None
-
-    blog.insert_one({"ID" : ID, "Auteur" : auteur, "Date" : str(date_du_jour), "Mise à jour" : maj, "Titre" : titre, "Texte" : texte, "Commentaires" : []})
-
 """nb_documents = forum.count_documents({})
 print(nb_documents)
 print(type(nb_documents))"""
 
-create_article("Ar", "Alex", "1er article", "Quel bel article")
+"""crud.create_article("Dulompont", "Thomas", "Mon 1er article", "On débute")
+id_article = blog.find_one({"Titre" : "Mon 1er article"})
+print(id_article["ID"])
+crud.update_article(id_article["ID"], "Mon 1er article", "On fais mieux")"""
+
+
+def ajouter_commentaire_article(ID:str, nom:str, prenom:str, commentaire:str) -> None:
+
+    nom = "dulompont"
+    prenom = "Thomas"
+    auteur = prenom + "." + nom.upper()[0]
+    heure = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+    a_modifier = blog.find_one({"ID" : ID})
+    id_commentaire = hashlib.sha256((str(heure).encode()) + (auteur.encode())).hexdigest()
+
+    dicommentaire = {
+        "ID Commentaire" : id_commentaire,
+        "Auteur" : auteur,
+        "Date" : heure,
+        "Commentaire" : commentaire
+    }
+
+    a_modifier["Commentaires"].append(dicommentaire)
+
+    blog.update_one({"ID" : ID}, {"$set" : {"Commentaires" : a_modifier["Commentaires"]}})
+
+
+#ajouter_commentaire_article("4f6591887e147295b566ad97c812b2da9769174ebc4b5aa8e1a57a3ab459795f", "Dulompont", "Thomas", "C'est moins")
+
+"""a_modifier = blog.find_one({"ID" : "4f6591887e147295b566ad97c812b2da9769174ebc4b5aa8e1a57a3ab459795f"})
+print(len(a_modifier["Commentaires"]))
+nb = 0
+
+for key in a_modifier:
+    nb += 1
+
+print(nb)"""
+
+heure = "2022-10-21 16:42:31"
+auteur = "Thomas.D"
+id_commentaire = hashlib.sha256((str(heure).encode()) + (auteur.encode())).hexdigest()
+print(id_commentaire)
