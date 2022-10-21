@@ -101,7 +101,7 @@ def create_article(nom:str, prenom:str, titre:str, texte:str) -> None:
     ID = hashlib.sha256((str(date_du_jour).encode()) + (titre.encode())).hexdigest()
 
     blog.insert_one({"ID" : ID, "Auteur" : auteur, "Date" : str(date_du_jour), "Mise à jour" : maj, "Titre" : titre, "Texte" : texte, "Commentaires" : []})
-    pass
+    
 
 def update_article(titre:str, texte:str) -> None:
     """Met à jour un article
@@ -114,7 +114,7 @@ def update_article(titre:str, texte:str) -> None:
     a_modifier["Mise à jour"] = str(date.today())
 
     blog.update_one({"ID" : id}, {"$set" : {"Titre" : a_modifier["Titre"], "Texte" : a_modifier["Texte"], "Mise à jour" : a_modifier["Mise à jour"]}})
-    pass
+    
 
 def delete_article(id:str) -> None:
     """Supprime un article
