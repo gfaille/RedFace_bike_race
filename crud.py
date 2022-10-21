@@ -14,7 +14,9 @@ users = db.Utilisateurs
 blog = db.Blog
 forum = db.Forum
 
+##################
 #Utilisateurs
+##################
 
 def create_user(nom:str, prenom:str, date_de_naissance:str, age:int, sexe:str, telephone:str, adresse_mail:str) -> None:
     """Créer un utilisateur
@@ -56,7 +58,9 @@ def calculate_age(date_de_naissance:tuple) -> int:
 
     pass
 
+##################
 #Blog - Articles
+##################
 
 def create_article(nom:str, prenom:str, titre:str, texte:str) -> None:
     """Créer un article de blog
@@ -73,13 +77,19 @@ def create_article(nom:str, prenom:str, titre:str, texte:str) -> None:
 
     blog.insert_one({"ID" : ID, "Auteur" : auteur, "Date" : str(date_du_jour), "Mise à jour" : maj, "Titre" : titre, "Texte" : texte, "Commentaires" : []})
 
-def update_article(titre:str, texte:str) -> None:
+def update_article(id:str, titre:str, texte:str) -> None:
     """Met à jour un article
-    :param titre: Titre de l'article
-    :param texte: Texte de l'article
+    :param id: ID de l'article à mettre à jour
+    :param titre: Nouveau titre de l'article à mettre à jour
+    :param texte: Nouveau texte de l'article à mettre à jour
     """
+    
+    a_modifier = blog.find_one({"ID" : id})
+    a_modifier["Titre"] = titre
+    a_modifier["Texte"] = texte
+    a_modifier["Mise à jour"] = str(date.today())
 
-    pass
+    blog.update_one({"ID" : id}, {"$set" : {"Titre" : a_modifier["Titre"], "Texte" : a_modifier["Texte"], "Mise à jour" : a_modifier["Mise à jour"]}})
 
 def delete_article(id:str) -> None:
     """Supprime un article
@@ -88,7 +98,9 @@ def delete_article(id:str) -> None:
 
     pass
 
+##################
 #Blog - Commentaires
+##################
 
 def add_comment():
     pass
