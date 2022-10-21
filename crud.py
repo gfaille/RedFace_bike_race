@@ -1,5 +1,5 @@
 import hashlib
-from datetime import date
+from datetime import date, datetime
 from pymongo import MongoClient
 
 client = MongoClient("mongodb://localhost:27017")
@@ -102,8 +102,29 @@ def delete_article(id:str) -> None:
 #Blog - Commentaires
 ##################
 
-def add_comment():
-    pass
+def add_comment_article(ID:str, nom:str, prenom:str, commentaire:str) -> None:
+    """Ajoute un commentaire à l'article souhaité
+    :param ID: ID de l'article sur lequel on souhaite ajouté le commentaire
+    :param nom: Nom de l'utilisateur qui souhaite ajouter un commentaire
+    :param prenom: Prénom de l'utilisateur qui souhaite ajouter un commentaire
+    :param commentaire: Commentaire de l'utilisateur
+    """
+
+    auteur = prenom + "." + nom.upper()[0]
+    heure = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    id_commentaire = hashlib.sha256((str(heure).encode()) + (auteur.encode())).hexdigest()
+
+    dicommentaire = {
+        "ID Commentaire" : id_commentaire,
+        "Auteur" : auteur,
+        "Date" : heure,
+        "Commentaire" : commentaire
+    }
+    
+    a_modifier = blog.find_one({"ID" : ID})
+    a_modifier["Commentaires"].append(dicommentaire)
+
+    blog.update_one({"ID" : ID}, {"$set" : {"Commentaires" : a_modifier["Commentaires"]}})
 
 def update_comment():
     pass
