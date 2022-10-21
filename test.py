@@ -100,3 +100,39 @@ print(nb_documents)
 print(type(nb_documents))"""
 
 create_article("Ar", "Alex", "1er article", "Quel bel article")
+
+def create_admin(nom:str, prenom:str, speudo:str, date_de_naissance:tuple, sexe:str, telephone:str, adresse_mail:str) -> None:
+    """Créer un administrateur
+    :param nom: Nom de famille de l'administrateur
+    :param prenom: Prénom de l'administrateur
+    :parm speudo: Pseudo de l'utilisateur
+    :param date_de_naissance : Date de naissance de l'administrateur
+    :param age: Age de l'administrateur
+    :param sexe: Sexe de l'administrateur
+    :param telephone: Numéro de téléphone de l'administrateur
+    :param adresse_mail: Adresse e-mail de l'administrateur
+    """
+    role = 0
+    date_inscription = date.today()
+    age = crud.calculate_age(date_de_naissance)
+    
+    users.insert_one({
+        "Role": role , 
+        "Nom": nom , 
+        "Prenom": prenom ,
+        "Pseudo": speudo,
+        "Date_de_naissance": str(date_de_naissance), 
+        "Age": age , "Sexe": sexe , 
+        "Telephone": telephone , 
+        "Adresse_mail": adresse_mail , 
+        "Date_inscription": str(date_inscription)})
+
+#create_admin("Clippe", "Loic", "lamerlock", (1990,4,4), "homme", "0609262099", "lamerlock4@gmail.com")
+
+def delete_user(pseudo:str) -> None:
+    """Supprime un utilisateur
+    :param adresse_mail: Adresse mail de l'utilisateur a supprimer
+    """
+    users.delete_one({"Pseudo": pseudo})
+
+delete_user("lamerlock")
