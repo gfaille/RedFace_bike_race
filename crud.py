@@ -95,7 +95,12 @@ def create_article(nom:str, prenom:str, titre:str, texte:str) -> None:
     :param titre: Titre de l'article
     :param texte: Texte de l'article
     """
+    auteur = nom + "." + prenom
+    date_du_jour = date.today()
+    maj = None
+    ID = hashlib.sha256((str(date_du_jour).encode()) + (titre.encode())).hexdigest()
 
+    blog.insert_one({"ID" : ID, "Auteur" : auteur, "Date" : str(date_du_jour), "Mise à jour" : maj, "Titre" : titre, "Texte" : texte, "Commentaires" : []})
     pass
 
 def update_article(titre:str, texte:str) -> None:
@@ -103,7 +108,12 @@ def update_article(titre:str, texte:str) -> None:
     :param titre: Titre de l'article
     :param texte: Texte de l'article
     """
+    a_modifier = blog.find_one({"ID" : id})
+    a_modifier["Titre"] = titre
+    a_modifier["Texte"] = texte
+    a_modifier["Mise à jour"] = str(date.today())
 
+    blog.update_one({"ID" : id}, {"$set" : {"Titre" : a_modifier["Titre"], "Texte" : a_modifier["Texte"], "Mise à jour" : a_modifier["Mise à jour"]}})
     pass
 
 def delete_article(id:str) -> None:
