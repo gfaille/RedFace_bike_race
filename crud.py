@@ -1,3 +1,5 @@
+import hashlib
+from datetime import date
 from pymongo import MongoClient
 
 client = MongoClient("mongodb://localhost:27017")
@@ -64,10 +66,10 @@ def create_article(nom:str, prenom:str, titre:str, texte:str) -> None:
     :param texte: Texte de l'article
     """
 
-    ID = blog.count_documents({}) + 1
     auteur = nom + "." + prenom
     date_du_jour = date.today()
     maj = None
+    ID = hashlib.sha256((str(date_du_jour).encode()) + (titre.encode())).hexdigest()
 
     blog.insert_one({"ID" : ID, "Auteur" : auteur, "Date" : str(date_du_jour), "Mise à jour" : maj, "Titre" : titre, "Texte" : texte, "Commentaires" : []})
 
