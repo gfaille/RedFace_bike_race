@@ -96,7 +96,7 @@ def delete_article(id:str) -> None:
     :param id: ID de l'article a supprimer
     """
 
-    pass
+    blog.delete_one({"ID" : id})
 
 ##################
 #Blog - Commentaires
