@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block head %}{% endblock head %}
+
+{% block body %}
+
+    {% for article in articles %}
+        {{article["Titre"], article["Texte"]}}
+    {% endfor %}
+
+{% endblock body %}
