@@ -153,8 +153,16 @@ def add_comment_article(ID:str, nom:str, prenom:str, commentaire:str) -> None:
 
     blog.update_one({"ID" : ID}, {"$set" : {"Commentaires" : a_modifier["Commentaires"]}})
 
-def update_comment():
+def update_comment_article():
     pass
 
-def delete_comment():
-    pass
+def delete_comment_article(id_article:str, id_commentaire:str) -> None:
+    """Supprime un commentaire d'un article
+    :param id_article: ID de l'article sur lequel supprimer le commentaire
+    :param id_commentaire: ID du commentaire a supprimer
+    """
+
+    blog.update_one(
+        {'ID': id_article},
+        {'$pull': {"Commentaires":{ "ID Commentaire": id_commentaire}}}
+        )
