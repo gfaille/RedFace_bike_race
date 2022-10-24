@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Accueil du site</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Bienvenue sur mon site</h1>
+    {% if email %}
+        {{email}} <br>     
+    {% endif %}
+
+        {% if mdp%}
+        {{mdp}} <br> 
+    {% endif %}
+    
+{% endblock %}

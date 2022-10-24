@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Accueil du site</title>
+{% endblock %}
+
+{% block body %}
+    <form action="" method="post">
+        {{ form.email.label  }}
+        {{ form.email()  }} <br>
+        {{ form.mdp.label  }}
+        {{ form.mdp()  }}
+        {{ form.csrf_token  }}
+        <input type="submit" value="Se connecter" >
+    </form>
+{% endblock %}
