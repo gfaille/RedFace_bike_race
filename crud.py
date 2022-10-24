@@ -18,20 +18,32 @@ forum = db.Forum
 #Utilisateurs
 ##################
 
-def create_user(nom:str, prenom:str, date_de_naissance:str, age:int, sexe:str, telephone:str, adresse_mail:str) -> None:
+def create_user(nom:str, prenom:str, pseudo:str, date_de_naissance:tuple, sexe:str, telephone:str, adresse_mail:str) -> None:
     """Créer un utilisateur
     :param nom: Nom de famille de l'utilisateur
     :param prenom: Prénom de l'utilisateur
-    :param date_de_naissance : Date de naissance de l'utilisateur
-    :param age: Age de l'utilisateur
+    :param date_de_naissance : Date de naissance de l'utilisateur (Année - Mois - Jour)
     :param sexe: Sexe de l'utilisateur
     :param telephone: Numéro de téléphone de l'utilisateur
     :param adresse_mail: Adresse e-mail de l'utilisateur
     """
+    role = 1
+    date_inscription = date.today()
+    age = calculate_age(date_de_naissance)
+    
+    users.insert_one({
+        "Role": role , 
+        "Nom": nom , "Prenom": prenom , 
+        "Pseudo": pseudo,
+        "Date_de_naissance": str(date_de_naissance), 
+        "Age": age , 
+        "Sexe": sexe , 
+        "Telephone": telephone , 
+        "Adresse_mail": adresse_mail , 
+        "Date_inscription": str(date_inscription)})
+    
 
-    pass
-
-def create_admin(nom:str, prenom:str, date_de_naissance:str, age:int, sexe:str, telephone:str, adresse_mail:str) -> None:
+def create_admin(nom:str, prenom:str, pseudo:str, date_de_naissance:str, age:int, sexe:str, telephone:str, adresse_mail:str) -> None:
     """Créer un administrateur
     :param nom: Nom de famille de l'administrateur
     :param prenom: Prénom de l'administrateur
@@ -41,22 +53,37 @@ def create_admin(nom:str, prenom:str, date_de_naissance:str, age:int, sexe:str, 
     :param telephone: Numéro de téléphone de l'administrateur
     :param adresse_mail: Adresse e-mail de l'administrateur
     """
+    role = 0
+    date_inscription = date.today()
+    age = calculate_age(date_de_naissance)
+    
+    users.insert_one({
+        "Role": role , 
+        "Nom": nom , 
+        "Prenom": prenom , 
+        "Pseudo": pseudo,
+        "Date_de_naissance": str(date_de_naissance), 
+        "Age": age , 
+        "Sexe": sexe , 
+        "Telephone": telephone , 
+        "Adresse_mail": adresse_mail , 
+        "Date_inscription": str(date_inscription)})
 
-    pass
 
-def delete_user(adresse_mail:str) -> None:
+def delete_user(pseudo:str) -> None:
     """Supprime un utilisateur
     :param adresse_mail: Adresse mail de l'utilisateur a supprimer
     """
+    users.delete_one({"Pseudo": pseudo})
 
-    pass
 
 def calculate_age(date_de_naissance:tuple) -> int:
     """Retourne l'âge de l'utilisateur
     :param date_de_naissance: Année, Mois, Jour
     """
-
-    pass
+    today = date.today()
+    age = today.year - date_de_naissance[0] - ((today.month, today.day) < (date_de_naissance[1], date_de_naissance[2]))
+    return age
 
 ##################
 #Blog - Articles
