@@ -140,3 +140,12 @@ footer section {
 footer section h3 {
     color: white;
 }
+
+.btn {
+    border: 1px solid white;
+    border-radius: 20px;
+    background-color: #370D1B;
+    width: fit-content;
+    color: white;
+    text-decoration: none;
+}
