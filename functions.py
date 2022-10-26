@@ -243,3 +243,12 @@ def shop_verify_item(id:int) -> bool:
     
     else:
         return False
+
+def shop_add_new_field(id:int, cle:str, valeur:str) -> None:
+    """Ajouter un nouveau champ dans un document
+    :param id: ID du document où l'on souhaite ajouter un nouveau champ
+    :param cle: Nom de la nouvelle clé
+    :param valeur: Valeur de la nouvelle clé
+    """
+
+    boutique.update_one({"ID" : id}, {"$set" : {cle : valeur}})
