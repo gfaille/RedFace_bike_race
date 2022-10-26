@@ -21,7 +21,7 @@ def create_id(author, date):
     id = str(hashlib.sha256((author+date).encode()).hexdigest())
     return id[0:10]
 
-def create_user(is_admin, nom, prenom, mail, password):
+def create_user(is_admin, nom, prenom, mail, pseudo, password):
 
     hash_password = hashlib.sha256(password.encode()).hexdigest()
 
@@ -29,13 +29,14 @@ def create_user(is_admin, nom, prenom, mail, password):
     if is_admin:
         role = 1
     else:
-        role = 2
+        role = 0
     user = {
         "id" : create_id(mail, date),
         "role" : role,
         "nom" : nom,
         "prenom" : prenom,
         "mail" : mail,
+        "pseudo" : pseudo,
         "password" : hash_password
     }
 
@@ -300,4 +301,4 @@ def modify_topic_forum(id, title, categorie, content):
     forums_topics.update_one({"id" : id}, {"$set": { "title" : topic["title"], "categorie" : topic["categorie"], "content" : topic["content"]}});
 
 
-#create_user(True, "thomas", "dlmp", "test@test.fr", "test")
+#create_user(True, "thomas", "dlmp", "test@test.fr", "virtux", "test")

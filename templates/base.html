@@ -5,8 +5,6 @@
     <meta charset="utf-8">
     <title>Travel - {{ title if title }}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link rel="stylesheet" href="{{ url_for('static', filename='article.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='front.css') }}">
 </head>
 <body>
     <nav class="box">
@@ -17,7 +15,11 @@
             <li><a href="/">Accueil</a></li>
             <li><a href="/blog">Blog</a></li>
             <li><a href="/boutique">Boutique</a></li>
-            <li><a href="#" class="btn">Espace membre</a></li>
+            <li><a href="/forum">Boutique</a></li>
+            <li><a href="/espace_membre" class="btn">Espace membre</a></li>
+            {% if session["is_admin"] == True%}
+            <li><a href="/admin" class="btn">Administration</a></li>
+            {% endif %}
         </ul>
     </nav>
     {% block content %} {% endblock %}
@@ -28,8 +30,8 @@
         <ul>
             <li><a href="#">Tour packages</a></li>
             <li><a href="#">Personalized offers</a></li>
-            <li><a href="#"> Special deals</a></li>
-            <li><a href="#"> Summer holiday</a></li>
+            <li><a href="#">Special deals</a></li>
+            <li><a href="#">Summer holiday</a></li>
         </ul>
         <ul>
             <li><a href="#">About us</a></li>

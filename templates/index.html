@@ -1,5 +1,8 @@
 {% extends('base.html') %}
 
+{% block csslink %}
+<link rel="stylesheet" href="{{ url_for('static', filename='front.css') }}">
+{% endblock %}
 {% block content %}
 <header>
     <section class="text">

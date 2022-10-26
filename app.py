@@ -60,7 +60,8 @@ def login():
             session['mail'] = infos_user["mail"]
             session['prenom'] = infos_user["prenom"]
             session['nom'] = infos_user["nom"]
-            
+            session['pseudo'] = infos_user["pseudo"]
+
             if infos_user["role"] == 1:
                 session['is_admin'] = True
             return redirect(url_for('home'))
@@ -236,3 +237,30 @@ def modify_topic_forum(id):
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html', title="404"), 404
+
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    error = None
+    formulaire = form.Register()
+
+    # Formulaire envoyé ?
+    if formulaire.validate_on_submit():
+        nom = formulaire.data["nom"]
+        prenom = formulaire.data["prenom"]
+        mail = formulaire.data["mail"]
+        pseudo = formulaire.data["pseudo"]
+        password = formulaire.data['password']
+
+        # Utilisateur inscrit ?
+        if functions.verify_user(mail, password):
+            error = "Les informations entrée sont déjà utilisées par un autre utilisateur !"
+        else:
+            functions.create_user(False, nom, prenom, mail, pseudo, password)
+            return redirect(url_for('login'))
+
+    # Deja connecter ?
+    try:
+        if session['is_logged'] == True:
+            return redirect(url_for('home'))
+    except:
+        return render_template('/register.html', title='Inscription', error = error, formulaire = formulaire)
