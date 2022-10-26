@@ -24,20 +24,18 @@
     </header>
 
     <main>
-        <h1>Derniers articles sur la boutique </h1>
+        <h1>{{ name }} TEST</h1>
 
-        {% for article in articles %}
+        <article>
+            <img src={{ url_for('static', filename=img) }} alt={{ name }}>
+            <h3>{{ name }} - {{ price }} - {{ description }}</h3>
+            <button>Ajouter au panier</button>
+        </article>
 
-            <article>
-                <img src={{ url_for('static', filename=article["IMG"]) }} alt={{ article["NAME"] }}>
-                <h3>{{ article["NAME"] }} - {{ article["PRICE"] }} - {{ article["DESCRIPTION"] }}</h3>
-                <button><a href="/boutique/{{ article["ID"] }}">Voir article</a></button>
-            </article>
+        <!--{% for article in articles %}
 
-<!--            {{article["NAME"]}} {{article["PRICE"]}} {{article["DESCRIPTION"]}}     -->
 
-        {% endfor %}
-
+        {% endfor %}-->
     </main>
 
     <footer>

@@ -252,3 +252,6 @@ def shop_add_new_field(id:int, cle:str, valeur:str) -> None:
     """
 
     boutique.update_one({"ID" : id}, {"$set" : {cle : valeur}})
+
+def shop_cart(id) -> None:
+    boutique.insert_one({"ID" : id})
