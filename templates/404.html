@@ -1,0 +1,18 @@
+{% extends('base.html') %}
+
+{% block content %}
+<header>
+    <div class="container">
+        <img src="{{ url_for('static', filename='img/background.svg') }}" alt="">
+    </div>
+</header>
+<h1>404</h1>
+<h2>Page introuvable</h2>
+<p>Malheureusement la page demandée n'existe pas...</p>
+<p>Nous vous recommandons de retourner à l'<a href="/">accueil de Travel</a></p>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endblock %}

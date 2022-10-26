@@ -1,0 +1,36 @@
+{% extends('base.html') %}
+
+{% block content %}
+<header>
+    <section class="text">
+        <h1>Participez à l'aventure de votre vie </h1>
+        <h2>La plus grande cours cycliste en environnement désertique du monde </h2>
+        <h4>1 mois , 2000Km , 3 pays visité , Rejoignez nous maintenant</h4>
+
+        <a href="Partir-à-l'aventure" class="btn"> Partir à l'aventure</a>
+    </section>
+    <div class="container">
+        <img src="layered-peaks-haikei_transparent.svg" alt="">
+    </div>
+
+</header>
+
+<div>
+    <h2>Derniers articles sur le blog </h2>
+    <h4>Recommended</h4>
+</div>
+{% if posts|length == 0 %}
+<p>Pas de post pour le moment</p>
+{% else %}
+{% for post in posts %}
+<main id="bmain">
+    <article>
+        <img src={{ post['img' ]}} alt={{ post['title'] }}>
+        <h3>{{ post['date_creation'] }} - {{ post['title'] }}</h3>
+        <a href="/blog/postblog/{{ post['id'] }}">Discover place</a>
+    </article>
+</main>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

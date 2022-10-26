@@ -1,0 +1,32 @@
+{% extends('base.html')%}
+
+{% block content %}
+<header>
+    <div class="container">
+        <img src="{{ url_for('static', filename='img/background.svg') }}" alt="">
+    </div>
+</header>
+<main class="Forum">
+    <article>
+        <h1>{{ topic['categorie'] }} - {{ topic['title'] }}</h1>
+        {% filter markdown %}
+        {{ topic['content'] }}
+        {% endfilter %}
+
+        <p class="info">Publié par {{ topic['author'] }} le {{ topic["date_creation"] }}</p>
+    </article>
+    {% for commentary in topic["commentary"] %}
+    <article>
+        <h4> {{ commentary["auteur"] }} - {{ commentary["date"] }} </h4>
+        {% filter markdown %}
+        {{ commentary["commentaire"] }}
+        {% endfilter %}
+    </article>
+    {% endfor %}
+    <form action="/forum/topic_forum/{{ topic['id'] }}" method="POST">
+        <label>Répondre :</label>
+        <input type="text" name="new_commentary">
+        <button class="commentaire">Envoyer</button>
+    </form>
+</main>
+{% endblock %}

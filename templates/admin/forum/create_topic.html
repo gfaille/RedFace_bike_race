@@ -1,0 +1,79 @@
+{% extends('admin/base.html')%}
+
+{% block navbar %}
+<div class="content">
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+        {% if message %}
+        <span id="{{ type_message }}">
+            {{ message }}
+        </span>
+        {% endif %}
+        <a href="/admin" class="navbar-brand d-flex d-lg-none me-4">
+            <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
+        </a>
+        <a href="#" class="sidebar-toggler flex-shrink-0">
+            <i class="fa fa-bars"></i>
+        </a>
+        <div class="navbar-nav align-items-center ms-auto">
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <img class="rounded-circle me-lg-2" src="{{ url_for('static', filename='admin/img/user.jpg') }}" alt="" style="width: 40px; height: 40px;">
+                    <span class="d-none d-lg-inline-flex">{{session["prenom"] + " " + session["nom"]}}</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                    <a href="/admin/logout" class="dropdown-item">Deconnexion</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+{% endblock%}
+
+{% block content %}
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4 justify-content-md-center">
+        <div class="col-sm-8 col-xl-8">
+            <div class="bg-light rounded h-100 p-4">
+                <a class="btn btn-sm btn-primary mb-4" href="/admin/forum"><i class="fa fa-arrow-left me-lg-2"></i> Annuler</a>
+                <form action="/admin/forum/create_topic_forum" method="post">
+                    <h4 class="mb-4">Créer un Topic</h4>
+                    <div class="form-floating mb-3">
+                        <input required type="text" name = "topic_title" class="form-control" id="floatingInput" placeholder="Mon super titre">
+                        <label for="floatingInput">Titre du Topic</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select required class="form-select" name="topic_categorie" id="floatingSelect" aria-label="Floating label select example">
+                            <option value="" selected disabled hidden>Selectionner une option</option>
+                            {% for categorie in categories %}
+                            <option value={{ categorie["name"] }}>{{ categorie["name"] }}</option>
+                            {% endfor%}
+                        </select>
+                        <label for="floatingSelect">Selectionner une catégorie</label>
+                    </div>
+                    <p>Vous pouvez utiliser le language <a href="https://www.markdownguide.org/getting-started/">MARKDOWN</a> pour la mise en page.</p>
+                    <div class="form-floating mb-3">
+                        <textarea required class="form-control" name = "topic_content" placeholder="Ceci est mon post..." id="floatingTextarea" style="height: 350px;"></textarea>
+                        <label for="floatingTextarea">Contenu du Topic</label>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary py-3 w-40">Publier le Topic</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}
+
+{% block footer %}
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-light rounded-top p-4">
+            <div class="row">
+                <div class="col-12 col-sm-6 text-center text-sm-start">
+                    &copy; <a href="">Travel</a>, Tout droit réservés. 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

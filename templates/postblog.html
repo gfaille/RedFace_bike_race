@@ -1,0 +1,35 @@
+{% extends('base.html')%}
+
+{% block content %}
+<header>
+    <div class="container">
+        <img src={{ url_for('static', filename='img/background.svg') }} alt="">
+    </div>
+    <section class="text">
+        <h1>{{ infos['title'] }}</h1>
+        <h3>{{ infos['date_creation'] }} - {{ infos['author'] }}</h3>
+    </section>
+</header>
+
+<main>
+    <img src={{ infos["img"] }} alt="{{ infos['title'] }}">
+    {% filter markdown %}
+    {{ infos['content'] }}
+    {% endfilter %}
+    <ul class="liste-commentaire">
+        {% for commentary in infos["commentary"] %}
+        <li class="commentaire">
+            <p>{{ commentary["auteur"] }} - {{ commentary["date"] }}</p>
+            <p>{{ commentary["commentaire"] }}</p>
+        </li>
+        {% endfor%}
+        <li>
+            <form action="/postblog/{{ infos['id'] }}" method="POST">
+                <label>Ajouter un commentaire</label>
+                <input type="text" name="new_commentary">
+                <button class="commentaire">Envoyer</button>
+            </form>
+        </li>
+    </ul>
+</main>
+{% endblock %}
