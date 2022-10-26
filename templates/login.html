@@ -5,16 +5,27 @@
 {% endblock %}
 
 {% block content %}
-<form action="/login" method="post">
-    <div class="form-floating mb-3">
-        {{ formulaire.mail() }}
-        {{ formulaire.mail.label }}
-    </div>
-    <div class="form-floating mb-4">
-        {{ formulaire.password() }}
-        {{ formulaire.password.label }}
-    </div>
-    {{ formulaire.submit() }}
-    {{ formulaire.csrf_token }}
-</form>
+<header>
+    <header>
+      </section>
+      <div class="container">
+        <img src="{{ url_for('static', filename='img/background.svg') }}" alt="">
+      </div>
+    </header>
+</header>
+<main class="subscription">
+    <form action="/login" method="post">
+        <h3>Connexion</h3>
+        <div class="form-floating mb-3">
+            {{ formulaire.mail.label }}
+            {{ formulaire.mail() }}
+        </div>
+        <div class="form-floating mb-4">
+            {{ formulaire.password.label }}
+            {{ formulaire.password() }}
+        </div>
+        {{ formulaire.submit() }}
+        {{ formulaire.csrf_token }}
+    </form>
+</main>
 {% endblock %}

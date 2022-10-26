@@ -1,31 +1,32 @@
 {% extends('base.html')%}
 
 {% block content %}
-<div>
-    <picture>
-        <img src="{{ url_for('static', filename='img/background.svg') }}" alt="dunes"/>
-    </picture>
-</div>
-
-<form action="/register" method="post">
-    <h3>Enregistrez vous</h3>
-
-    {{ formulaire.nom.label }}
-    {{ formulaire.nom() }}
-
-    {{ formulaire.prenom.label }}
-    {{ formulaire.prenom() }}
-
-    {{ formulaire.mail.label }}
-    {{ formulaire.mail() }}
-
-    {{ formulaire.pseudo.label }}
-    {{ formulaire.pseudo() }}
-
-    {{ formulaire.password.label }}
-    {{ formulaire.password() }}
-
-    {{ formulaire.submit() }}
-    {{ formulaire.csrf_token }}
-</form>
+<header>
+    <div class="container">
+        <img src="{{ url_for('static', filename='img/background.svg') }}" alt="">
+    </div>
+</header>
+<main class="subscription">
+    <form action="/register" method="post">
+        <h3>Inscription</h3>
+    
+        {{ formulaire.nom.label }}
+        {{ formulaire.nom() }}
+    
+        {{ formulaire.prenom.label }}
+        {{ formulaire.prenom() }}
+    
+        {{ formulaire.mail.label }}
+        {{ formulaire.mail() }}
+    
+        {{ formulaire.pseudo.label }}
+        {{ formulaire.pseudo() }}
+    
+        {{ formulaire.password.label }}
+        {{ formulaire.password() }}
+    
+        {{ formulaire.submit() }}
+        {{ formulaire.csrf_token }}
+    </form>
+</main>
 {% endblock%}

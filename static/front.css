@@ -1,6 +1,6 @@
 header {
     width: 100%;
-    height: 70vh;
+    height: 40vh;
     background-image: linear-gradient(to bottom, #135058, #f1f2b5);
     position: relative;
     min-height: 700px;
@@ -143,6 +143,7 @@ footer section h3 {
 
 main article img {
     width: 90%;
+    height: 200px;
 }
 
 main article a {
@@ -161,16 +162,72 @@ main article a {
     width: fit-content;
     color: white;
     text-decoration: none;
+    padding: 10px;
 }
 
 .choix {
     display: grid;
     grid-gap: 20px;
-    grid-template-rows: repeat(auto-fill, minmax(250px, 1fr));
     width: 100%;
-    height: 700px;
     max-width: 1100px;
     align-items: center;
+}
+
+.A-main {
+    display: grid;
+    grid-gap: 20px;
+    width: 100%;
+    max-width: 1100px;
+    height: 900px;
+    align-items: center;
+}
+
+.A-main .A-page .A-div {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1700px;
+
+}
+
+.A-main .A-page .A-div p {
+    text-align: center;
+    width: 200px;
+}
+
+.A-main .A-page .A-div h3 {
+    text-align: center;
+    width: 200px;
+}
+
+.A-main .A-page .btn {
+    display: flex;
+    align-self: center;
+    padding: 10px;
+    height: fit-content;
+    width: 150px;
+
+}
+
+.A-main .A-page .A-div article {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.A-main img {
+    display: flex;
+    justify-self: flex-start;
+    width: 100%;
+    max-width: 300px;
+}
+
+.A-main p {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+
 }
 
 .Forum {
@@ -193,4 +250,122 @@ main article a {
 .Forum section {
     grid-column-end: auto;
     border: 2px solid black;
+}
+
+.erreur {
+    height: 300px;
+}
+
+.p-page {
+    display: grid;
+    grid-gap: 20px;
+    width: 100%;
+    max-width: 1100px;
+    height: 900px;
+    align-items: center;
+}
+
+.p-page .A-page .A-div {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1700px;
+
+}
+
+.p-page .A-page .A-div p {
+    text-align: center;
+    width: 200px;
+}
+
+.p-page .A-page .A-div h3 {
+    text-align: center;
+    width: 200px;
+}
+
+.p-page .A-page .btn {
+    display: flex;
+    align-self: center;
+    padding: 10px;
+    height: fit-content;
+    width: 150px;
+
+}
+
+.p-page .A-page .A-div article {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.p-page img {
+    display: flex;
+    justify-self: flex-start;
+    width: 100%;
+    max-width: 200px;
+    padding: 20px;
+}
+
+.p-page .A-page {
+    border: 3px solid black;
+}
+
+.p-page p {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+
+}
+
+form {
+    background-color: rgba(255, 255, 255, 0.13);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    padding: 25px 35px;
+}
+
+form * {
+    font-family: 'Poppins', sans-serif;
+    color: black;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+
+form h3 {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+input {
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+.subscription{
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
 }
