@@ -16,7 +16,9 @@
     {% filter markdown %}
     {{ infos['content'] }}
     {% endfilter %}
+    <p>Publié le {{ infos['date_creation'] }} par {{ infos['author'] }}</p>
     <ul class="liste-commentaire">
+        <li><h2>Commentaires :</h2></li>
         {% for commentary in infos["commentary"] %}
         <li class="commentaire">
             <p>{{ commentary["auteur"] }} - {{ commentary["date"] }}</p>
@@ -24,11 +26,15 @@
         </li>
         {% endfor%}
         <li>
-            <form action="/postblog/{{ infos['id'] }}" method="POST">
+            {% if session['logged'] == True %}
+            <form action="/blog/postblog/{{ infos['id'] }}" method="POST">
                 <label>Ajouter un commentaire</label>
                 <input type="text" name="new_commentary">
-                <button class="commentaire">Envoyer</button>
+                <button>Envoyer</button>
             </form>
+            {% else %}
+            
+            {% endif %}
         </li>
     </ul>
 </main>

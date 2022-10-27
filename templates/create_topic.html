@@ -1,0 +1,36 @@
+{% extends('base.html') %}
+
+{% block content %}
+<header>
+    <div class="container">
+        <img src={{ url_for('static', filename='img/background.svg') }} alt="">
+    </div>
+    <section class="text">
+        <h1>{{ title }}</h1>
+        <h4>Vous pouvez utiliser le language <a href="https://www.markdownguide.org/getting-started/">MARKDOWN</a> pour la mise en page de votre topic</h4>
+    </section>
+</header>
+
+<main>
+    <form class='create-topic' action="/forum/create_topic" method="POST">
+        <div>
+            <label>Titre du topic</label>
+            <input type="text" name="topic_title">
+        </div>
+        <div>
+            <label for="floatingSelect">Selectionner une catégorie</label>
+            <select required name="topic_categorie" id="floatingSelect" aria-label="Floating label select example">
+                <option value="" selected disabled hidden>Selectionner une option</option>
+                {% for categorie in categories %}
+                <option value={{ categorie["name"] }}>{{ categorie["name"] }}</option>
+                {% endfor%}
+            </select>
+        </div>
+        <div>
+            <label for="floatingTextarea">Contenu du Topic</label>
+            <textarea required class="form-control" name = "topic_content" placeholder="Ceci est mon post..." id="floatingTextarea"></textarea>
+        </div>
+        <button>Créer un topic</button>
+    </form>
+</main>
+{% endblock %}

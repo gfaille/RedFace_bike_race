@@ -1,0 +1,71 @@
+{% extends('base.html')%}
+
+{% block content %}
+<header>
+    <div class="container">
+        <img src="{{ url_for('static', filename='img/background.svg') }}" alt="">
+    </div>
+</header>
+    {% if session["is_logged"] == True %}
+        <a href="/forum/create_topic" class="btn-create-topic">Créer un Topic</a>
+    {% else %}
+    <a href="/login" class="btn-create-topic">Connexion</a>
+    {% endif %}
+    {% if session["is_admin"] == True %}
+    {% for categorie in categories %}
+        <div class="forum-index">
+            <div class="table">
+                <h2>{{categorie["name"]}}</h1>
+                <div class="table-header">
+                    <div class="header__item"><a id="name" class="filter__link" href="#">Titre</a></div>
+                    <div class="header__item"><a id="wins" class="filter__link filter__link--number" href="#">Contenu</a></div>
+                    <div class="header__item"><a id="draws" class="filter__link filter__link--number" href="#">Publié le</a></div>
+                    <div class="header__item"><a id="losses" class="filter__link filter__link--number" href="#">Réponses</a></div>
+                    <div class="header__item"><a id="losses" class="filter__link filter__link--number" href="#">Actions</a></div>
+                </div>
+                <div class="table-content">	
+                    {% for topic in topics %}
+                    {% if topic["categorie"] == categorie["name"] %}
+                    <div class="table-row">
+                        <div class="table-data">{{ topic["title"] }}</div>
+                        <div class="table-data">{{ topic["content"] }}</div>
+                        <div class="table-data">{{ topic["date_creation"] }}</div>
+                        <div class="table-data">{{ topic["commentary"]|length }}</div>
+                        <div class="table-data"><a href="/forum/topic_forum/{{ topic["id"] }}">Voir</a> <a href="admin//forum/modify_topic_forum/{{ topic["id"] }}">Modifier</a></div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>	
+            </div>
+        </div>
+    {% endfor %}
+    {% else %}
+    {% for categorie in categories %}
+        <div class="forum-index">
+            <div class="table">
+                <h2>{{categorie["name"]}}</h1>
+                <div class="table-header">
+                    <div class="header__item"><a id="name" class="filter__link" href="#">Titre</a></div>
+                    <div class="header__item"><a id="wins" class="filter__link filter__link--number" href="#">Contenu</a></div>
+                    <div class="header__item"><a id="draws" class="filter__link filter__link--number" href="#">Publié le</a></div>
+                    <div class="header__item"><a id="losses" class="filter__link filter__link--number" href="#">Réponses</a></div>
+                    <div class="header__item"><a id="losses" class="filter__link filter__link--number" href="#">Actions</a></div>
+                </div>
+                <div class="table-content">	
+                    {% for topic in topics %}
+                    {% if topic["categorie"] == categorie["name"] %}
+                    <div class="table-row">
+                        <div class="table-data">{{ topic["title"] }}</div>
+                        <div class="table-data">{{ topic["content"] }}</div>
+                        <div class="table-data">{{ topic["date_creation"] }}</div>
+                        <div class="table-data">{{ topic["commentary"]|length }}</div>
+                        <div class="table-data"><a href="/forum/topic_forum/{{ topic["id"] }}">Voir</a></div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>	
+            </div>
+        </div>
+    {% endfor %}
+    {% endif %}
+{% endblock %}

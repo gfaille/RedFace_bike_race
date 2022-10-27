@@ -15,18 +15,27 @@
 
         <p class="info">Publié par {{ topic['author'] }} le {{ topic["date_creation"] }}</p>
     </article>
-    {% for commentary in topic["commentary"] %}
-    <article>
-        <h4> {{ commentary["auteur"] }} - {{ commentary["date"] }} </h4>
-        {% filter markdown %}
-        {{ commentary["commentaire"] }}
-        {% endfilter %}
-    </article>
-    {% endfor %}
-    <form action="/forum/topic_forum/{{ topic['id'] }}" method="POST">
-        <label>Répondre :</label>
-        <input type="text" name="new_commentary">
-        <button class="commentaire">Envoyer</button>
-    </form>
+    <ul class="liste-commentaire">
+        <li><h2>Commentaires :</h2></li>
+        {% for commentary in topic["commentary"] %}
+        <li class="commentaire">
+            <p>{{ commentary["auteur"] }} - {{ commentary["date"] }}</p>
+            {% filter markdown %}
+            {{ commentary["commentaire"] }}
+            {% endfilter %}
+        </li>
+        {% endfor %}
+        <li>
+            {% if session['logged'] == True %}
+            <form action="/forum/topic_forum/{{ topic['id'] }}" method="POST">
+                <label class="mark">Vous pouvez utiliser le language <a href="https://www.markdownguide.org/getting-started/">MARKDOWN</a> pour la mise en page de votre commentaire </label>
+                <label>Ajouter un commentaire :</label>
+                <input type="text" name="new_commentary">
+                <button>Envoyer</button>
+            </form>
+            {% else %}
+
+            {% endif %}
+        </li>
 </main>
 {% endblock %}

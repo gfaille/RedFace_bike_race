@@ -1,0 +1,27 @@
+{% extends('base.html')%}
+
+{% block content %}
+<header>
+    <div class="container">
+        <img src={{ url_for('static', filename='img/background.svg') }} alt="">
+    </div>
+    <section class="text">
+        <h1>Salut à toi {{ user['pseudo'] }} !</h1>
+    </section>
+</header>
+<main class="infos-user">
+    <h4>Quelques informations :</h4>
+    <ul>
+        <li>
+            Prenom : {{ user['prenom']}}
+        </li>
+        <li>
+            Nom : {{ user['nom'] }}
+        </li>
+        <li>
+            Pseudo : {{ user['pseudo']}}
+        </li>
+    </ul>
+</main>
+
+{% endblock %}

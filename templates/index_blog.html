@@ -1,0 +1,21 @@
+{% extends('base.html') %}
+
+{% block content %}
+<header>
+    <section class="text">
+        <h1>Le Blog</h1>
+    </section>
+    <div class="container">
+        <img src="{{ url_for('static', filename='img/background.svg') }}" alt="">
+    </div>
+</header>
+<main class="bmain">
+    {% for post in blogposts %}
+    <article>
+        <img src="{{ post["img"] }}" alt="{{ post["title"] }}">
+        <h3>{{ post["title"] }}</h3>
+        <a href="/blog/postblog/{{ post["id"] }}">Découvrir l'article</a> 
+    </article>
+    {% endfor %}
+</main>
+{% endblock %}

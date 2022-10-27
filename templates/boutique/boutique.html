@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header>
+    <section class="text">
+        <h1>Le Blog</h1>
+    </section>
+    <div class="container">
+        <img src="{{ url_for('static', filename='img/background.svg') }}" alt="">
+    </div>
+</header>
+    <main>
+        <h1>Derniers articles sur la boutique </h1>
+        <br>
+
+        {% for article in articles %}
+
+            <article>
+                <a href="/boutique/{{ article["ID"] }}"><img src={{ url_for('static', filename=article["IMG"]) }} alt={{ article["NAME"] }}></a>
+                <h3>{{ article["NAME"] }} - {{ article["PRICE"] }}</h3>
+                <br>
+                <button><a href="/boutique/{{ article["ID"] }}">Voir article</a></button>
+                <br><br>
+            </article>
+
+<!--            {{article["NAME"]}} {{article["PRICE"]}} {{article["DESCRIPTION"]}}     -->
+
+        {% endfor %}
+
+    </main>
+
+{% endblock %}

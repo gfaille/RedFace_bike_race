@@ -83,7 +83,7 @@ def logout():
     else:
         return redirect(url_for('login'))
 @app.route("/admin/blog")
-def index_postblog():
+def admin_index_postblog():
     if isadmin():
         all_post = functions.get_all_postblog()
         return render_template('admin/blog/index_postblog.html', title="Blog", all_post = all_post)
@@ -91,7 +91,7 @@ def index_postblog():
         return redirect(url_for('adminlogin'))
 
 @app.route("/admin/blog/create_postblog", methods=['GET', 'POST'])
-def create_postblog():
+def admin_create_postblog():
     if isadmin():
         message = None
         type_message = None
@@ -145,7 +145,7 @@ def postblog(id):
     return render_template('postblog.html', infos = post, title = title)
 
 @app.route("/admin/forum")
-def index_forum():
+def admin_index_forum():
     if isadmin():
         all_topics = functions.get_all_topic_forum()
         return render_template('admin/forum/index_forum.html', title="Forum", all_topics = all_topics)
@@ -171,7 +171,7 @@ def create_categorie_forum():
         return redirect(url_for('adminlogin'))
 
 @app.route("/admin/forum/create_topic_forum", methods=['GET', 'POST'])
-def create_topic_forum():
+def admin_create_topic_forum():
     if isadmin():
         message = None
         type_message = None
@@ -264,3 +264,59 @@ def register():
             return redirect(url_for('home'))
     except:
         return render_template('/register.html', title='Inscription', error = error, formulaire = formulaire)
+
+@app.route('/blog')
+def blog():
+    all_blogpost = functions.get_all_postblog()
+    return render_template('/index_blog.html', title="Blog", blogposts = all_blogpost)
+
+@app.route("/forum")
+def index_forum():
+    all_topics = functions.get_all_topic_forum()
+    all_categories = functions.get_all_categories_forum()
+    return render_template('/index_forum.html', title="Forum", topics = all_topics, categories = all_categories)
+
+@app.route("/forum/create_topic", methods=['GET', 'POST'])
+def create_topic():
+    if islogged:
+        message = None
+        type_message = None
+        alerte_red = "alerte-message-r"
+        alerte_green = "alerte-message-g"
+
+        all_categories = functions.get_all_categories_forum()
+
+        if request.method == 'POST':
+
+            topic_title = request.form['topic_title']
+            topic_content = "\n" + request.form['topic_content']
+            topic_categorie = request.form['topic_categorie']
+
+            functions.create_topic_forum(topic_title, topic_content, session["pseudo"], topic_categorie)
+            message = "Le topic a bien été publié !"
+            type_message = alerte_green
+            return redirect(url_for('index_forum'))
+        return render_template('/create_topic.html', title="Créer un topic", categories = all_categories)
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/space_member')
+def space_member():
+    if islogged():
+        user_infos = functions.get_info_user(session['mail'])
+        return render_template('/espace_membre.html', title="Votre Espace", user = user_infos)
+    else:
+        return redirect(url_for('login'))
+
+### Boutique
+
+@app.route("/boutique")
+def afficher_boutique():
+    articles_boutique = functions.shop_get_all_items()
+    return render_template("boutique/boutique.html", articles = articles_boutique)
+
+@app.route("/boutique/<id>", methods=['GET', 'POST'])
+def boutique(id):
+    article = functions.shop_get_item(int(id))
+
+    return render_template("boutique/article.html", article = article)
