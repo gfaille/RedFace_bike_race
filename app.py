@@ -13,10 +13,6 @@ def afficher_boutique():
 
 @app.route("/boutique/<id>", methods=['GET', 'POST'])
 def boutique(id):
-    article = functions.shop_get_item(id)
-    name = article["NAME"]
-    price = article["PRICE"]
-    description = article["DESCRIPTION"]
-    img = article["IMG"]
+    article = functions.shop_get_item(int(id))
 
-    return render_template("boutique/article.html", name = name, price = price, description = description, img = img)
+    return render_template("boutique/article.html", article = article)

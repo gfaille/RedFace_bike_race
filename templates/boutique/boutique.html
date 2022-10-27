@@ -25,13 +25,16 @@
 
     <main>
         <h1>Derniers articles sur la boutique </h1>
+        <br>
 
         {% for article in articles %}
 
             <article>
-                <img src={{ url_for('static', filename=article["IMG"]) }} alt={{ article["NAME"] }}>
-                <h3>{{ article["NAME"] }} - {{ article["PRICE"] }} - {{ article["DESCRIPTION"] }}</h3>
+                <a href="/boutique/{{ article["ID"] }}"><img src={{ url_for('static', filename=article["IMG"]) }} alt={{ article["NAME"] }}></a>
+                <h3>{{ article["NAME"] }} - {{ article["PRICE"] }}</h3>
+                <br>
                 <button><a href="/boutique/{{ article["ID"] }}">Voir article</a></button>
+                <br><br>
             </article>
 
 <!--            {{article["NAME"]}} {{article["PRICE"]}} {{article["DESCRIPTION"]}}     -->

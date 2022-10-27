@@ -3,7 +3,7 @@
 <!-- Head -->
 {% block head %}
     <link rel="stylesheet" href={{ url_for('static', filename='css/front.css') }}>
-    <title>Boutique</title>
+    <title>{{ article["NAME"] }}</title>
 {% endblock head %}
 
 <!-- Body -->
@@ -24,11 +24,12 @@
     </header>
 
     <main>
-        <h1>{{ name }} TEST</h1>
+        <h1>{{ article["NAME"] }} {{ " - " }} {{ article["PRICE"] }}</h1>
 
         <article>
-            <img src={{ url_for('static', filename=img) }} alt={{ name }}>
-            <h3>{{ name }} - {{ price }} - {{ description }}</h3>
+            <img src={{ url_for('static', filename=article["IMG"]) }} alt={{ name }}>
+            <h3>{{ article["DESCRIPTION"] }}</h3>
+            <br>
             <button>Ajouter au panier</button>
         </article>
 
