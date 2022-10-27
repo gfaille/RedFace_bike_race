@@ -31,7 +31,7 @@ def home():
     all_blogpost = functions.get_all_postblog()
     if len(all_blogpost) > 3:
         all_blogpost = all_blogpost[0:3]
-    return render_template('index.html', posts = all_blogpost)
+    return render_template('index.html', posts = all_blogpost, title = "Accueil")
 
 @app.route("/admin")
 def adminHome():
@@ -313,10 +313,10 @@ def space_member():
 @app.route("/boutique")
 def afficher_boutique():
     articles_boutique = functions.shop_get_all_items()
-    return render_template("boutique/boutique.html", articles = articles_boutique)
+    return render_template("boutique/boutique.html", articles = articles_boutique, title = "Boutique")
 
 @app.route("/boutique/<id>", methods=['GET', 'POST'])
 def boutique(id):
     article = functions.shop_get_item(int(id))
 
-    return render_template("boutique/article.html", article = article)
+    return render_template("boutique/article.html", article = article, title= "Article")
