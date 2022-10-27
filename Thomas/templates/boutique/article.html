@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+<!-- Head -->
+{% block head %}
+    <link rel="stylesheet" href={{ url_for('static', filename='css/front.css') }}>
+    <title>{{ article["NAME"] }}</title>
+{% endblock head %}
+
+<!-- Body -->
+{% block body %}
+
+    <header>
+        <nav class="box">
+            <div id="logo">
+                <img src={{ url_for('static', filename='img/Travel.png') }} alt="logo travel">
+            </div>
+            <ul>
+                <li> <a href="Accueil">Accueil</a> </li>
+                <li> <a href="Blog">Blog</a> </li>
+                <li> <a href="Espace membre">Mon compte</a> </li>
+                <li> <a href="Mon panier">Mon panier</a> </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>{{ article["NAME"] }} {{ " - " }} {{ article["PRICE"] }}</h1>
+
+        <article>
+            <img src={{ url_for('static', filename=article["IMG"]) }} alt={{ name }}>
+            <h3>{{ article["DESCRIPTION"] }}</h3>
+            <br>
+            <button>Ajouter au panier</button>
+        </article>
+
+        <!--{% for article in articles %}
+
+
+        {% endfor %}-->
+    </main>
+
+    <footer>
+        <div id="logo">
+            <img src={{ url_for('static', filename='img/Travel.png') }} alt="logo travel">
+        </div>
+        <ul>
+            <li><a href="Tour packages">Tour packages</a></li>
+            <li><a href="Personalized offers">Personalized offers</a></li>
+            <li><a href="Special deals"> Special deals</a></li>
+            <li><a href="Summer holiday"> Summer holiday</a></li>
+        </ul>
+        <ul>
+            <li><a href="About us">About us </a></li>
+            <li><a href="FAQ"> FAQ</a></li>
+            <li><a href="Terms and conditions"> Terms and conditions </a></li>
+            <li><a href="contact">contact</a></li>
+        </ul>
+        <section>
+            <p>
+            <h3>Follow us on </h3>
+            </p>
+            <ul>
+                <img src={{ url_for('static', filename='img/Instagram_icon.png') }} alt="Instagram">
+                <li> <a href="#">Instagram</a> </li>
+                <img src={{ url_for('static', filename='img/facebook.png') }} alt="Facebook">
+                <li> <a href="#">Facebook</a> </li>
+                <img src={{ url_for('static', filename='img/twitter.jpeg') }} alt="Twitter">
+                <li> <a href="#">Twitter</a> </li>
+            </ul>
+        </section>
+    </footer>
+
+{% endblock body %}
